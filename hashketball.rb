@@ -116,3 +116,29 @@ def big_shoe_rebounds
 end
 
 
+def player_with_longest_name
+  player = nil 
+  game_hash.each do |location, team_data| 
+    team_data[:player].each do |player_name, player_data| 
+      if player == nil || player_name.length > player.length
+        player = player_name 
+      end
+    end
+  end
+  player
+end
+
+def long_name_steals_a_ton 
+  player_longest_name = player_with_longest_name
+  player_most_steals = nil 
+  most_steals = 0 
+  game_hash.each do |location, team_data|
+    team_data[:player].each do |player_name, player_data| 
+      if player_data[:steals] > most_steals 
+        player_most_steals = player_name 
+        most_steals = player_data[:steals]
+      end
+    end
+  end
+  player_longest_name == player_most_steals
+end
